@@ -1,5 +1,6 @@
 //Siempre se debe hacer la importacion de express
 import express, { NextFunction, Request, Response } from 'express';
+import { PORT } from './environments/env';
 
 //Cuando algo es de tipo funcion siempre hay que mandarla a llamar (hacer que se ejecute).
 //Se guarda dentro de una constante todo lo que viene dentro de la funcion express().
@@ -19,7 +20,7 @@ app.get(`${prefix}/auth`, async (req: Request, res:Response, next: NextFunction)
 //la ruta quedaria  =  http://localhost:3000/api/auth
 
 //La funcion listen recibe como parametro un puerto y tambien puede recibir un callback ()
-const port:number = 3000;
+const port:number = Number(PORT);
 
 app.listen(port, () => {
     console.log(`El puerto se ha levantado en el puerto: ${port}`);
