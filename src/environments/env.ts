@@ -9,5 +9,6 @@ config();
 export const PORT = process.env.PORT ?? 3000 //NULLISH COALESCING (??): Si la variable es nula o no existe que asigne el valor de la derecha.
 
 
+//EL process es un evento global que se inicialza siempre que levantamos nuestro proyecto de express.
 //El objeto process.env contiene todas las variables de entorno definidas en el sistema o cargadas desde un archivo .env
 //Sin invocar config(), las variables definidas en el archivo .env no estarán disponibles en process.env.

@@ -1,5 +1,6 @@
 {
     "conventionalCommits.scopes": [
-        "tsconfig/package.json"
+        "tsconfig/package.json",
+        "modules/auth"
     ]
 }
