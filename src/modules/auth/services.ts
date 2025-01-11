@@ -1,5 +1,7 @@
 //Ahora vamos a hacer una inyeccion de dependencia
 
+import { CodesHttpEnum } from "../../enums/codesHttpEnum";
+import { HttpResponse } from "../../utils/httpResponse";
 import AuthRepository from "./repository";
 
 //La inyeccion de dependencia es instanciar otra clase dentro de una clase para que esta de aqui herede sus metodos y propiedades.
@@ -29,7 +31,25 @@ export class AuthServices{
 
         //Si el usuario no existe se procede a crear uno mediante los parametros pasados a la funcion.
         const newUser = await this._authRepository.createUser({username, password});
-        return newUser;
+        return HttpResponse.response(CodesHttpEnum.created, newUser, 'usuario creado con éxito')
 
+    }
+
+    async loginService(username: string, password: string){
+        const allUser = await this._authRepository.readUsers();
+
+        const existUser = allUser.find( (user) => {
+            return user.username == username;
+        } )
+
+        if(!existUser){
+            throw new Error('El usuario no existe')
+        }
+
+        if(existUser.password !== password){
+            throw new Error('Clave incorrecta')
+        }
+        
+        
     }
 }

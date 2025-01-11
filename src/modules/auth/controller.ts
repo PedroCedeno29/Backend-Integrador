@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { UserI } from "../../interfaces/Auth.interface";
+import { CredentialI, UserI } from "../../interfaces/Auth.interface";
 import { AuthServices } from "./services";
 
 
@@ -11,8 +11,20 @@ export const RegisterController = async(req: Request) => {
         const {username, password} = req.body as UserI             //Desecturación: Acceder a las propiedades directamente de un objeto. Entre llaves van las propiedades desestructuradas. para que sea mas rápido.
         //req.body es una propiedad del objeto req que contiene los datos enviados en el cuerpo de la solicitud HTTP.
         //Se pone as UserI para asegurar que el req.body cumpla con la estructura de la interface UserI, es decir que contenga username y password.
-        const user = await new AuthServices().registerService(username, password)
-        return {'message' : 'Usuario', 'usuario': user}
+        return await new AuthServices().registerService(username, password)
+        
+    } catch (error) {
+        throw error
+    }
+
+}
+
+export const LoginController = async(req:Request) => {
+    try {
+        const {user, password} = req.body as CredentialI;
+
+        return await new AuthServices().loginService(user, password);
+
     } catch (error) {
         throw error
     }

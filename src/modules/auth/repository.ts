@@ -45,7 +45,7 @@ export default class AuthRepository{
 
     async findByUsername(username: string): Promise<UserI | undefined>{
         const users = await this.readUsers();
-        //Esta funcion recibe un callback como parametro de la funcion find()
+        //Esta funcion find() sirve para recorrer cada elemento de un arreglo, pasando ese elemento como argumento al callback, es decir cada elemento del arreglo se asigna al parametro user.
         return users.find((user) => user.username === username); //Cuando es una comparación de una sola línea no es necesaria usar las llaves y el return, esto sería de manera implícita.
 
      }
